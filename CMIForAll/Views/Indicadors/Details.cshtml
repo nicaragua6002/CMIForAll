@@ -1,0 +1,66 @@
+﻿@model CMIForAll.Models.Indicador
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Indicador</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Frecuencia_Medicion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Frecuencia_Medicion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unidad_Medida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unidad_Medida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Objetivo.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Objetivo.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo.Id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,461 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CMIModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="CMIModelStoreContainer">
+    <EntitySet Name="CMISet" EntityType="CMIModel.Store.CMISet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Perspectivas" EntityType="CMIModel.Store.Perspectivas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Objetivos" EntityType="CMIModel.Store.Objetivos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Indicadores" EntityType="CMIModel.Store.Indicadores" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Indicador_Datos" EntityType="CMIModel.Store.Indicador_Datos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tipos" EntityType="CMIModel.Store.Tipos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Metas" EntityType="CMIModel.Store.Metas" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CMIObjetivo" Association="CMIModel.Store.CMIObjetivo">
+      <End Role="CMI" EntitySet="CMISet" />
+      <End Role="Objetivo" EntitySet="Objetivos" />
+    </AssociationSet>
+    <AssociationSet Name="PerspectivaObjetivo" Association="CMIModel.Store.PerspectivaObjetivo">
+      <End Role="Perspectiva" EntitySet="Perspectivas" />
+      <End Role="Objetivo" EntitySet="Objetivos" />
+    </AssociationSet>
+    <AssociationSet Name="ObjetivoIndicador" Association="CMIModel.Store.ObjetivoIndicador">
+      <End Role="Objetivo" EntitySet="Objetivos" />
+      <End Role="Indicador" EntitySet="Indicadores" />
+    </AssociationSet>
+    <AssociationSet Name="IndicadorIndicador_Dato" Association="CMIModel.Store.IndicadorIndicador_Dato">
+      <End Role="Indicador" EntitySet="Indicadores" />
+      <End Role="Indicador_Dato" EntitySet="Indicador_Datos" />
+    </AssociationSet>
+    <AssociationSet Name="TipoIndicador" Association="CMIModel.Store.TipoIndicador">
+      <End Role="Tipo" EntitySet="Tipos" />
+      <End Role="Indicador" EntitySet="Indicadores" />
+    </AssociationSet>
+    <AssociationSet Name="IndicadorMeta" Association="CMIModel.Store.IndicadorMeta">
+      <End Role="Indicador" EntitySet="Indicadores" />
+      <End Role="Meta" EntitySet="Metas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CMISet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Periodo" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Perspectivas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Objetivos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Metrica" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Ponderacion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CMIId" Type="int" Nullable="false" />
+    <Property Name="PerspectivaId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Indicadores">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Frecuencia_Medicion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Unidad_Medida" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ObjetivoId" Type="int" Nullable="false" />
+    <Property Name="TipoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Indicador_Datos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Valor" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Fecha" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IndicadorId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tipos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Metas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Valor_esperado" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Fecha_limite" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IndicadorId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CMIObjetivo">
+    <End Role="CMI" Type="CMIModel.Store.CMISet" Multiplicity="1" />
+    <End Role="Objetivo" Type="CMIModel.Store.Objetivos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CMI">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Objetivo">
+        <PropertyRef Name="CMIId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PerspectivaObjetivo">
+    <End Role="Perspectiva" Type="CMIModel.Store.Perspectivas" Multiplicity="1" />
+    <End Role="Objetivo" Type="CMIModel.Store.Objetivos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Perspectiva">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Objetivo">
+        <PropertyRef Name="PerspectivaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ObjetivoIndicador">
+    <End Role="Objetivo" Type="CMIModel.Store.Objetivos" Multiplicity="1" />
+    <End Role="Indicador" Type="CMIModel.Store.Indicadores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Objetivo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Indicador">
+        <PropertyRef Name="ObjetivoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="IndicadorIndicador_Dato">
+    <End Role="Indicador" Type="CMIModel.Store.Indicadores" Multiplicity="1" />
+    <End Role="Indicador_Dato" Type="CMIModel.Store.Indicador_Datos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Indicador">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Indicador_Dato">
+        <PropertyRef Name="IndicadorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TipoIndicador">
+    <End Role="Tipo" Type="CMIModel.Store.Tipos" Multiplicity="1" />
+    <End Role="Indicador" Type="CMIModel.Store.Indicadores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Indicador">
+        <PropertyRef Name="TipoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="IndicadorMeta">
+    <End Role="Indicador" Type="CMIModel.Store.Indicadores" Multiplicity="1" />
+    <End Role="Meta" Type="CMIModel.Store.Metas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Indicador">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Meta">
+        <PropertyRef Name="IndicadorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="CMIModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="CMIModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CMISet" EntityType="CMIModel.CMI" />
+          <EntitySet Name="Perspectivas" EntityType="CMIModel.Perspectiva" />
+          <EntitySet Name="Objetivos" EntityType="CMIModel.Objetivo" />
+          <EntitySet Name="Indicadores" EntityType="CMIModel.Indicador" />
+          <EntitySet Name="Indicador_Datos" EntityType="CMIModel.Indicador_Dato" />
+          <AssociationSet Name="CMIObjetivo" Association="CMIModel.CMIObjetivo">
+            <End Role="CMI" EntitySet="CMISet" />
+            <End Role="Objetivo" EntitySet="Objetivos" />
+          </AssociationSet>
+          <AssociationSet Name="PerspectivaObjetivo" Association="CMIModel.PerspectivaObjetivo">
+            <End Role="Perspectiva" EntitySet="Perspectivas" />
+            <End Role="Objetivo" EntitySet="Objetivos" />
+          </AssociationSet>
+          <AssociationSet Name="ObjetivoIndicador" Association="CMIModel.ObjetivoIndicador">
+            <End Role="Objetivo" EntitySet="Objetivos" />
+            <End Role="Indicador" EntitySet="Indicadores" />
+          </AssociationSet>
+          <AssociationSet Name="IndicadorIndicador_Dato" Association="CMIModel.IndicadorIndicador_Dato">
+            <End Role="Indicador" EntitySet="Indicadores" />
+            <End Role="Indicador_Dato" EntitySet="Indicador_Datos" />
+          </AssociationSet>
+          <EntitySet Name="Tipos" EntityType="CMIModel.Tipo" />
+          <AssociationSet Name="TipoIndicador" Association="CMIModel.TipoIndicador">
+            <End Role="Tipo" EntitySet="Tipos" />
+            <End Role="Indicador" EntitySet="Indicadores" />
+          </AssociationSet>
+          <EntitySet Name="Metas" EntityType="CMIModel.Meta" />
+          <AssociationSet Name="IndicadorMeta" Association="CMIModel.IndicadorMeta">
+            <End Role="Indicador" EntitySet="Indicadores" />
+            <End Role="Meta" EntitySet="Metas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CMI">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" />
+          <Property Name="Periodo" Type="String" Nullable="false" />
+          <NavigationProperty Name="Objetivos" Relationship="CMIModel.CMIObjetivo" FromRole="CMI" ToRole="Objetivo" />
+        </EntityType>
+        <EntityType Name="Perspectiva">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" />
+          <NavigationProperty Name="Objetivos" Relationship="CMIModel.PerspectivaObjetivo" FromRole="Perspectiva" ToRole="Objetivo" />
+        </EntityType>
+        <EntityType Name="Objetivo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" />
+          <Property Name="Metrica" Type="String" Nullable="false" />
+          <Property Name="Ponderacion" Type="String" Nullable="false" />
+          <NavigationProperty Name="CMI" Relationship="CMIModel.CMIObjetivo" FromRole="Objetivo" ToRole="CMI" />
+          <Property Name="CMIId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Perspectiva" Relationship="CMIModel.PerspectivaObjetivo" FromRole="Objetivo" ToRole="Perspectiva" />
+          <Property Name="PerspectivaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Indicadores" Relationship="CMIModel.ObjetivoIndicador" FromRole="Objetivo" ToRole="Indicador" />
+        </EntityType>
+        <EntityType Name="Indicador">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" />
+          <Property Name="Frecuencia_Medicion" Type="String" Nullable="false" />
+          <Property Name="Unidad_Medida" Type="String" Nullable="false" />
+          <NavigationProperty Name="Objetivo" Relationship="CMIModel.ObjetivoIndicador" FromRole="Indicador" ToRole="Objetivo" />
+          <Property Name="ObjetivoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Indicador_Datos" Relationship="CMIModel.IndicadorIndicador_Dato" FromRole="Indicador" ToRole="Indicador_Dato" />
+          <NavigationProperty Name="Tipo" Relationship="CMIModel.TipoIndicador" FromRole="Indicador" ToRole="Tipo" />
+          <Property Name="TipoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Metas" Relationship="CMIModel.IndicadorMeta" FromRole="Indicador" ToRole="Meta" />
+        </EntityType>
+        <EntityType Name="Indicador_Dato">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Valor" Type="String" Nullable="false" />
+          <Property Name="Fecha" Type="String" Nullable="false" />
+          <NavigationProperty Name="Indicador" Relationship="CMIModel.IndicadorIndicador_Dato" FromRole="Indicador_Dato" ToRole="Indicador" />
+          <Property Name="IndicadorId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="CMIObjetivo">
+          <End Type="CMIModel.CMI" Role="CMI" Multiplicity="1" />
+          <End Type="CMIModel.Objetivo" Role="Objetivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CMI">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Objetivo">
+              <PropertyRef Name="CMIId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PerspectivaObjetivo">
+          <End Type="CMIModel.Perspectiva" Role="Perspectiva" Multiplicity="1" />
+          <End Type="CMIModel.Objetivo" Role="Objetivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perspectiva">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Objetivo">
+              <PropertyRef Name="PerspectivaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ObjetivoIndicador">
+          <End Type="CMIModel.Objetivo" Role="Objetivo" Multiplicity="1" />
+          <End Type="CMIModel.Indicador" Role="Indicador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Objetivo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Indicador">
+              <PropertyRef Name="ObjetivoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="IndicadorIndicador_Dato">
+          <End Type="CMIModel.Indicador" Role="Indicador" Multiplicity="1" />
+          <End Type="CMIModel.Indicador_Dato" Role="Indicador_Dato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Indicador">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Indicador_Dato">
+              <PropertyRef Name="IndicadorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Tipo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Indicadores" Relationship="CMIModel.TipoIndicador" FromRole="Tipo" ToRole="Indicador" />
+        </EntityType>
+        <Association Name="TipoIndicador">
+          <End Type="CMIModel.Tipo" Role="Tipo" Multiplicity="1" />
+          <End Type="CMIModel.Indicador" Role="Indicador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Indicador">
+              <PropertyRef Name="TipoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Meta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" />
+          <Property Name="Valor_esperado" Type="String" Nullable="false" />
+          <Property Name="Fecha_limite" Type="String" Nullable="false" />
+          <NavigationProperty Name="Indicador" Relationship="CMIModel.IndicadorMeta" FromRole="Meta" ToRole="Indicador" />
+          <Property Name="IndicadorId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="IndicadorMeta">
+          <End Type="CMIModel.Indicador" Role="Indicador" Multiplicity="1" />
+          <End Type="CMIModel.Meta" Role="Meta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Indicador">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Meta">
+              <PropertyRef Name="IndicadorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CMIModelStoreContainer" CdmEntityContainer="CMIModelContainer">
+    <EntitySetMapping Name="CMISet">
+      <EntityTypeMapping TypeName="IsTypeOf(CMIModel.CMI)">
+        <MappingFragment StoreEntitySet="CMISet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Perspectivas">
+      <EntityTypeMapping TypeName="IsTypeOf(CMIModel.Perspectiva)">
+        <MappingFragment StoreEntitySet="Perspectivas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Objetivos">
+      <EntityTypeMapping TypeName="IsTypeOf(CMIModel.Objetivo)">
+        <MappingFragment StoreEntitySet="Objetivos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Metrica" ColumnName="Metrica" />
+          <ScalarProperty Name="Ponderacion" ColumnName="Ponderacion" />
+          <ScalarProperty Name="CMIId" ColumnName="CMIId" />
+          <ScalarProperty Name="PerspectivaId" ColumnName="PerspectivaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Indicadores">
+      <EntityTypeMapping TypeName="IsTypeOf(CMIModel.Indicador)">
+        <MappingFragment StoreEntitySet="Indicadores">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Frecuencia_Medicion" ColumnName="Frecuencia_Medicion" />
+          <ScalarProperty Name="Unidad_Medida" ColumnName="Unidad_Medida" />
+          <ScalarProperty Name="ObjetivoId" ColumnName="ObjetivoId" />
+          <ScalarProperty Name="TipoId" ColumnName="TipoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Indicador_Datos">
+      <EntityTypeMapping TypeName="IsTypeOf(CMIModel.Indicador_Dato)">
+        <MappingFragment StoreEntitySet="Indicador_Datos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="IndicadorId" ColumnName="IndicadorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tipos">
+      <EntityTypeMapping TypeName="IsTypeOf(CMIModel.Tipo)">
+        <MappingFragment StoreEntitySet="Tipos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Metas">
+      <EntityTypeMapping TypeName="IsTypeOf(CMIModel.Meta)">
+        <MappingFragment StoreEntitySet="Metas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Valor_esperado" ColumnName="Valor_esperado" />
+          <ScalarProperty Name="Fecha_limite" ColumnName="Fecha_limite" />
+          <ScalarProperty Name="IndicadorId" ColumnName="IndicadorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

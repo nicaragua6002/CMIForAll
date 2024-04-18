@@ -1,0 +1,64 @@
+﻿@model CMIForAll.Models.Objetivo
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Objetivo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Metrica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Metrica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ponderacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ponderacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CMI.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CMI.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Perspectiva.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Perspectiva.Nombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

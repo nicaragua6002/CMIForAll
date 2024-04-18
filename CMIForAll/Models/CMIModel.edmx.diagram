@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5855392b45964971af026465c4059883" Name="Diagram1" ZoomLevel="97" >
+        <EntityTypeShape EntityType="CMIModel.CMI" Width="1.5" PointX="1.25" PointY="3.625" />
+        <EntityTypeShape EntityType="CMIModel.Perspectiva" Width="1.5" PointX="4.125" PointY="1.125" />
+        <EntityTypeShape EntityType="CMIModel.Objetivo" Width="1.5" PointX="4.125" PointY="3.5" />
+        <EntityTypeShape EntityType="CMIModel.Indicador" Width="1.5" PointX="6.875" PointY="3.375" />
+        <EntityTypeShape EntityType="CMIModel.Indicador_Dato" Width="1.5" PointX="9.5" PointY="4.25" />
+        <AssociationConnector Association="CMIModel.CMIObjetivo" />
+        <AssociationConnector Association="CMIModel.PerspectivaObjetivo" />
+        <AssociationConnector Association="CMIModel.ObjetivoIndicador" />
+        <AssociationConnector Association="CMIModel.IndicadorIndicador_Dato" />
+        <EntityTypeShape EntityType="CMIModel.Tipo" Width="1.5" PointX="7" PointY="1" />
+        <AssociationConnector Association="CMIModel.TipoIndicador" />
+        <EntityTypeShape EntityType="CMIModel.Meta" Width="1.5" PointX="9.375" PointY="1.25" />
+        <AssociationConnector Association="CMIModel.IndicadorMeta" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
